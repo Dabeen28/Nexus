@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset 'utf-8';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 * {
@@ -22,26 +22,360 @@ li {
     list-style: none;
 }
 
-html {}
+html {
+    font-size: 16px;
+    
+    /* 가로 스크롤 없애는 거! (아무리 확대해도 안보임. body에 넣으면 안됑 */
+    overflow-x: hidden;
+}
 
 body {
     font-family: 'Roboto', 'Noto Sans KR', sans-serif;
     font-size: 16px;
-    font-weight: 400;
     line-height: 1.4;
     letter-spacing: -0.64px;
     color: #333;
+    font-weight: 400;
 }
 
 /* 공통요소 */
 .container {
     position: relative;
     display: block;
-    width: 1440px;
+    max-width: 1440px;
+    width: 100%;
     margin: 0 auto;
 }
 
 .wrap {
+    position: relative;
+    display: block;
+}
+
+/* 상단영역 */
+.header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 999999;
+
+}
+
+/* 상단 주메뉴 고정 */
+.header-focus {
+    position: fixed;
+    background: #fff;
+    border-bottom: 1px solid #e4e4e4;
+    animation-name: slidedown;
+    animation-duration: 0.5s;
+}
+
+@keyframes slidedown {
+    from {
+        margin-top: -80px;
+    }
+
+    to {
+        margin-top: -0px;
+    }
+}
+
+
+.header-focus .logo {
+    background: url('../images/logo_dark.svg') no-repeat center !important;
+    background-size: contain;
+}
+
+.header-focus .gnb a {
+    color: #20283b !important;
+    font-weight: 400 !important;
+}
+
+.header>.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    display: block;
+    width: 90px;
+    height: 27px;
+    background: url('../images/logo.png') no-repeat center;
+    background-size: contain;
+}
+
+.gnb {
+    display: block;
+}
+
+.gnb-list {
+    display: flex;
+}
+
+.gnb-list>li {
+    display: block;
+    margin-left: 58px;
+}
+
+.gnb-list>li>a {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 300;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.gnb-list>li>a:hover {
+    text-decoration: underline;
+}
+
+/* 비주얼영역 */
+.visual {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.sw-visual {}
+
+.visual-box {
+    width: 100%;
+    height: 100vh;
+}
+
+.v1 {
+    background: url('../images/visual_1.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.v2 {
+    background: url('../images/visual_2.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.v3 {
+    background: url('../images/visual_3.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.v4 {
+    background: url('../images/visual_4.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.v5 {
+    background: url('../images/visual_5.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.v6 {
+    background: url('../images/visual_6.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.visual-box .container {
+    display: flex;
+    align-items: center;    
+    height: 100%;
+}
+.visual-box .container img {
+    height: 156px;
+    margin-left: 20px;
+    transform: translateX(-50px);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s !important;
+}
+
+/* .sw-visual .swiper-wrapper .swiper-slide-active .visual-box .container img { */
+.sw-visual .swiper-wrapper .swiper-slide-active img {
+    transition: transform 1.0s, opacity 1.0s !important;
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+/* 
+.sw-visual .swiper-wrapper .swiper-slide-prev img {
+    transition: transform 0.6s, opacity 0.6s !important;
+    opacity: 0 !important;
+    transform: translateX(0) !important;
+} */
+
+.sw-visual-pg {
+    left: 50% !important;    
+    transform: translateX(700px);
+    bottom: calc(50% - 50px) !important;    
+    width: 8px !important;
+}
+.sw-visual-pg .swiper-pagination-bullet {
+    position: relative;
+
+    width: 8px;
+    height: 8px;
+
+    border: 1px solid #fff;
+    background: rgba(255, 255, 255, 0.0);
+    opacity: 1;  
+    transition: background 0.3s;
+
+    overflow: hidden;
+}
+
+.sw-visual-pg .swiper-pagination-bullet:hover {
+    background: rgba(255, 255, 255, 1.0);
+}
+
+.sw-visual-pg .swiper-pagination-bullet::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 100%;
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 100%;  
+}
+.sw-visual-pg .swiper-pagination-bullet-active::before {  
+    top: -1px;  
+}   
+
+.sw-visual-pg-active::before {  
+    animation: ani-down 1.0s;
+}
+
+@keyframes ani-down {
+    0% {
+        top: -1px;
+    }
+    100% {
+        top: 100%;
+    }
+}
+
+/* 스토리영역 */
+.story {
+    position: relative;
+    display: block;
+}
+
+.story>.container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+}
+
+.story-box {
+    width: 720px;
+    height: 720px;
+}
+
+.story-box-top {
+    position: absolute;
+    right: 0;
+    top: -140px;
+    display: flex;
+    align-items: center;
+
+    height: 140px;
+    background-color: #fff;
+    z-index: 999;
+}
+
+.story-title {
+    font-size: 14px;
+    color: #222;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-left: 23px;
+}
+
+.story-box-first {
+    height: 580px;
+}
+
+.story-box-up {
+    margin-top: -140px;
+}
+
+.story-1 {
+    background: #fff;
+}
+
+.story-2 {
+    background: url('../images/story_1.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.story-3 {
+    background: url('../images/story_2.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.story-4 {
+    background: url('../images/story_3.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.story-5 {
+    background: url('../images/story_4.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.story-6 {
+    background: url('../images/story_5.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.story-7 {
+    background: url('../images/story_6.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.story-8 {
+    background: #fff;
+}
+
+.story-9 {
+    background: #d0d2d5;
+}
+
+.story-box-last {
+    height: 140px;
+}
+
+/* 갤러리영역 */
+.gallery {
+    position: relative;
+    display: block;
+}
+
+/* Contact 영역 */
+.contact {
+    position: relative;
+    display: block;
+}
+
+/* 브랜드영역 */
+.brand {
+    position: relative;
+    display: block;
+}
+
+/* 하단영역 */
+.footer {
     position: relative;
     display: block;
 }
